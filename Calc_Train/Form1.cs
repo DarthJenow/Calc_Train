@@ -13,12 +13,18 @@ namespace Calc_Train
 {
     public partial class Form1 : Form
     {
+        /// <summary>
+        /// Creates gloabl variables
+        /// </summary>
         public int x1;
         public int x2;
         public int y;
         public string task;
         public Boolean solving = false;
 
+        /// <summary>
+        /// Gets executed when the programm is started
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
@@ -28,6 +34,9 @@ namespace Calc_Train
             buttonStart.Text = "Start";
         }
 
+        /// <summary>
+        /// Enables or disables task creating
+        /// </summary>
         public void changeStart()
         {
             if (solving)
@@ -48,6 +57,10 @@ namespace Calc_Train
             }
         }
 
+        #region makeTasks
+        /// <summary>
+        /// gets a random operation
+        /// </summary>
         public void makeTask()
         {
             int operation = (new Random()).Next(0, 4);
@@ -69,6 +82,9 @@ namespace Calc_Train
             }
         }
 
+        /// <summary>
+        /// makes a plus task
+        /// </summary>
         public void operationPlus()
         {
             Random random = new Random();
@@ -82,6 +98,9 @@ namespace Calc_Train
             labelTask.Text = task;
         }
 
+        /// <summary>
+        /// makes a minus task
+        /// </summary>
         public void operationMinus()
         {
             Random random = new Random();
@@ -94,6 +113,9 @@ namespace Calc_Train
             labelTask.Text = task;
         }
 
+        /// <summary>
+        /// makes a multiply task
+        /// </summary>
         public void operationMultiply()
         {
             Random random = new Random();
@@ -107,6 +129,9 @@ namespace Calc_Train
             labelTask.Text = task;
         }
 
+        /// <summary>
+        /// makes a divide task
+        /// </summary>
         public void operationDivide()
         {
             Random random = new Random();
@@ -118,11 +143,19 @@ namespace Calc_Train
             task = x1 + " / " + x2;
             labelTask.Text = task;
         }
+        #endregion
 
+        /// <summary>
+        /// gets proceeded if the start / stop button gets klicked
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonStart_Click(object sender, EventArgs e)
         {
+            // Enables / disables the form
             changeStart();
 
+            // if calcuating mode is enabled, the first task gets generated, if not the label gets changed
             if (solving)
             {
                 makeTask();
@@ -133,20 +166,35 @@ namespace Calc_Train
             }
         }
 
+        /// <summary>
+        /// gets enabled if while the textBoxResult is focused and a key gets pressed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void textBoxResult_KeyPress(object sender, KeyPressEventArgs e)
         {
+            // Check if the pressed key was enter
             if (e.KeyChar == (char) ConsoleKey.Enter)
             {
+                // simulates a click on the enterButton
                 buttonEnterResult_Click(null, null);
 
+                // disables the beep
                 e.Handled = true;
             }
-}
+        }
 
+        /// <summary>
+        /// gets enabled if the enter button gets klicked
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonEnterResult_Click(object sender, EventArgs e)
         {
+            // tries to parse the textfield.text
             try
             {
+                // Checks if entered answer is right, log gets written and next task gets generated, else also log and textfield.text gets cleared
                 if (Int32.Parse(textBoxResult.Text) == y)
                 {
                     richTextBoxLog.AppendText("\u2714" + " " + task + "\r\n");
@@ -160,13 +208,23 @@ namespace Calc_Train
                     labelTask.Text = task;
                 }
             }
-            catch (FormatException)
+            catch (FormatException) // if a FormatException appears, writes log and clears textfield.text
             {
                 richTextBoxLog.AppendText("UnexpectedInput.Exception" + "\r\n");
                 textBoxResult.Text = "";
                 labelTask.Text = task;
             }
 
+        }
+
+        /// <summary>
+        /// Closes the programm
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
