@@ -23,7 +23,7 @@ namespace Calc_Train
         }
 
         /// <summary>
-        /// Just closes the form
+        /// just closes the form
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -39,26 +39,41 @@ namespace Calc_Train
         /// <param name="e"></param>
         private void buttonOK_Click(object sender, EventArgs e)
         {
-            saveSettings();
-
-            this.Close();
+            if (saveSettings())
+            {
+               this.Close();
+            }
         }
 
         /// <summary>
         /// saves the current settings
         /// </summary>
-        public void saveSettings()
+        public Boolean saveSettings()
         {
             main main = new main();
-            
-            main.boolOperand.plus = checkBoxPlus.Checked;
-            main.boolOperand.minus = checkBoxMinus.Checked;
-            main.boolOperand.multiply = checkBoxMultiply.Checked;
-            main.boolOperand.divide = checkBoxDivide.Checked;
+
+            // checks if at least one operation method is checked
+            if (checkBoxPlus.Checked || checkBoxMinus.Checked || checkBoxMultiply.Checked || checkBoxDivide.Checked)
+            {
+                // writes state to variables in "main"
+                main.boolOperand.plus = checkBoxPlus.Checked;
+                main.boolOperand.minus = checkBoxMinus.Checked;
+                main.boolOperand.multiply = checkBoxMultiply.Checked;
+                main.boolOperand.divide = checkBoxDivide.Checked;
+
+                return true;
+            }
+            else
+            {
+                System.Windows.Forms.MessageBox.Show("You need to check at least one operation type!", "Error", MessageBoxButtons.OK);
+                return false;
+            }
         }
 
         private void settings_Load(object sender, EventArgs e)
         {
+            // loads the settings when the window gets opened
+
             checkBoxPlus.Checked = main.boolOperand.plus;
             checkBoxMinus.Checked = main.boolOperand.minus;
             checkBoxMultiply.Checked = main.boolOperand.multiply;

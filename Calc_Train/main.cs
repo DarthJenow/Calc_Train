@@ -22,12 +22,16 @@ namespace Calc_Train
         public string task;
         public Boolean solving = false;
 
+        /// <summary>
+        /// class to access the variables from other forms
+        /// </summary>
         public static class boolOperand
         {
-            public static Boolean plus = false;
-            public static Boolean minus = false;
-            public static Boolean multiply = false;
-            public static Boolean divide = false;
+            // indicte if the mode is active
+            public static Boolean plus = true;
+            public static Boolean minus = true;
+            public static Boolean multiply = true;
+            public static Boolean divide = true;
         }
 
         /// <summary>
@@ -37,10 +41,12 @@ namespace Calc_Train
         {
             InitializeComponent();
 
+            // disables by program start the textbox and the enter button
             textBoxResult.Enabled = false;
             buttonEnterResult.Enabled = false;
             buttonStart.Text = "Start";
 
+            // enables by default all 4 kinds of operations
             boolOperand.plus = true;
             boolOperand.minus = true;
             boolOperand.multiply = true;
@@ -54,17 +60,31 @@ namespace Calc_Train
         {
             if (solving)
             {
+                // disables textbox and enter button
                 textBoxResult.Enabled = false;
                 buttonEnterResult.Enabled = false;
                 buttonStart.Text = "Start";
+
+                //enables menu strip
+                menuStrip1.Enabled = true;
+
+                // enables the window controls (e.g. close button etc)
+                this.ControlBox = true;
 
                 solving = false;
             }
             else
             {
+                // enables textbox and enter button
                 textBoxResult.Enabled = true;
                 buttonEnterResult.Enabled = true;
-                buttonStart.Text = "Strop";
+                buttonStart.Text = "Stop";
+
+                // disables menu strip
+                menuStrip1.Enabled = false;
+
+                // disables the window controls (e.g. close button etc)
+                this.ControlBox = false;
 
                 solving = true;
             }
@@ -76,23 +96,37 @@ namespace Calc_Train
         /// </summary>
         public void makeTask()
         {
-            int operation = (new Random()).Next(0, 4);
+            int operation;
+            Boolean repeat = true;
 
-            switch (operation)
-            {
-                case 0:
-                    operationPlus();
-                    break;
-                case 1:
-                    operationMinus();
-                    break;
-                case 2:
-                    operationMultiply();
-                    break;
-                case 3:
-                    operationDivide();
-                    break;
-            }
+            // loos repeats as long, until a task gets randomized which is "allowed" by the settings
+            do {
+                operation = (new Random()).Next(0, 4);
+
+                switch (operation)
+                {
+                    case 0:
+                        repeat = boolOperand.plus;
+
+                        operationPlus();
+                        break;
+                    case 1:
+                        repeat = boolOperand.minus;
+
+                        operationMinus();
+                        break;
+                    case 2:
+                        repeat = boolOperand.multiply;
+
+                        operationMultiply();
+                        break;
+                    case 3:
+                        repeat = boolOperand.divide;
+
+                        operationDivide();
+                        break;
+                }
+            } while (!repeat) ;
         }
 
         /// <summary>
@@ -180,7 +214,7 @@ namespace Calc_Train
         }
 
         /// <summary>
-        /// gets enabled if while the textBoxResult is focused and a key gets pressed
+        /// gets enabled while the textBoxResult is focused and a key gets pressed
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -240,11 +274,22 @@ namespace Calc_Train
             this.Close();
         }
 
+        /// <summary>
+        /// opens the settings form if the tool strip entry for settings gets clicked
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             settings settings = new settings();
             
             settings.ShowDialog();
+        }
+
+        // opens a version info popup if the tool strip entry for version gets clicked
+        private void versionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Version: v0.1.2", "Version info", MessageBoxButtons.OK);
         }
     }
 }
