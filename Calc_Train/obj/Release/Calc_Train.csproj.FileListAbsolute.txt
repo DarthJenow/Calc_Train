@@ -7,4 +7,6 @@ D:\Workspace\C#\Calc_Train\Calc_Train\obj\Release\Calc_Train.exe
 D:\Workspace\C#\Calc_Train\Calc_Train\obj\Release\Calc_Train.pdb
 D:\Workspace\C#\Calc_Train\Calc_Train\obj\Release\Calc_Train.main.resources
 D:\Workspace\C#\Calc_Train\Calc_Train\obj\Release\Calc_Train.settings.resources
-D:\Workspace\C#\Calc_Train\Calc_Train\obj\Release\Calc_Train.csprojResolveAssemblyReference.cache
+D:\Workspace\C#\Calc_Train\Calc_Train\bin\Release\brain.ico
+D:\Workspace\C#\Calc_Train\Calc_Train\bin\Release\calcuator.ico
+D:\Workspace\C#\Calc_Train\Calc_Train\bin\Release\settings.ico

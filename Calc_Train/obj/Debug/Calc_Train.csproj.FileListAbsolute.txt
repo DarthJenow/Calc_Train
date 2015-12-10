@@ -17,3 +17,6 @@ D:\Workspace\C#\Calc_Train\Calc_Train\obj\Debug\Calc_Train.Properties.Resources.
 D:\Workspace\C#\Calc_Train\Calc_Train\obj\Debug\Calc_Train.csproj.GenerateResource.Cache
 D:\Workspace\C#\Calc_Train\Calc_Train\obj\Debug\Calc_Train.settings.resources
 D:\Workspace\C#\Calc_Train\Calc_Train\obj\Debug\Calc_Train.main.resources
+D:\Workspace\C#\Calc_Train\Calc_Train\bin\Debug\brain.ico
+D:\Workspace\C#\Calc_Train\Calc_Train\bin\Debug\calcuator.ico
+D:\Workspace\C#\Calc_Train\Calc_Train\bin\Debug\settings.ico

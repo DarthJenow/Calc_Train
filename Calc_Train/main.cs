@@ -68,8 +68,8 @@ namespace Calc_Train
                 //enables menu strip
                 menuStrip1.Enabled = true;
 
-                // enables the window controls (e.g. close button etc)
-                this.ControlBox = true;
+                // change the symbol of the form
+                this.Icon = new Icon("calcuator.ico");
 
                 solving = false;
             }
@@ -83,8 +83,8 @@ namespace Calc_Train
                 // disables menu strip
                 menuStrip1.Enabled = false;
 
-                // disables the window controls (e.g. close button etc)
-                this.ControlBox = false;
+                // change the symbol of the form
+                this.Icon = new Icon("brain.ico");
 
                 solving = true;
             }
@@ -290,6 +290,14 @@ namespace Calc_Train
         private void versionToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Version: v0.1.2", "Version info", MessageBoxButtons.OK);
+        }
+
+        private void iconsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("All icons came from icons8.com. \r\n Navigate to site?", "Icon credits", MessageBoxButtons.OKCancel) == DialogResult.OK)
+            {
+                System.Diagnostics.Process.Start("http://icons8.com/license/");
+            }
         }
     }
 }
